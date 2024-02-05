@@ -11,7 +11,7 @@ const requireAuth = (req, res, next) => {
   }
   try {
     token = token.split(" ")[1];
-    const decoded = jwt.verify(token, config.JWT_SECRET);
+    const decoded = jwt.verify(token, "JWT_SECRET");
     req.user = decoded;
   } catch (err) {
     return res.status(401).send("Invalid Token");
@@ -20,4 +20,42 @@ const requireAuth = (req, res, next) => {
   return next();
 };
 
-module.exports = requireAuth;
+const isAdmin = (req, res, next) => {
+  let token = req.body.token || req.query.token || req.headers["authorization"];
+  if (!token) {
+    return res
+      .status(401)
+      .send("Unauthorized. A token is required for authentication");
+  }
+  try {
+    token = token.split(" ")[1];
+    const decoded = jwt.verify(token, "JWT_SECRET");
+    console.log(decoded);
+    if ((req.user = decoded && decoded.role === "admin")) {
+      return next();
+    }
+  } catch (err) {
+    return res.status(401).send("you are not a admin");
+  }
+};
+
+const isHost = (req, res, next) => {
+  let token = req.body.token || req.query.token || req.headers["authorization"];
+  if (!token) {
+    return res
+      .status(401)
+      .send("Unauthorized. A token is required for authentication");
+  }
+  try {
+    token = token.split(" ")[1];
+    const decoded = jwt.verify(token, "JWT_SECRET");
+    console.log(decoded);
+    if ((req.user = decoded && decoded.role === "host")) {
+      return next();
+    }
+  } catch (err) {
+    return res.status(401).send("you are not a admin");
+  }
+};
+
+module.exports = { requireAuth, isAdmin , isHost };

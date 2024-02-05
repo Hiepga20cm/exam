@@ -51,8 +51,9 @@ const login = async (req, res) => {
         userId: user._id,
         email,
         username: user.username,
+        role: user.role,
       },
-      process.env.JWT_SECRET,
+      "JWT_SECRET",
       {
         expiresIn: "1d",
       }
@@ -67,6 +68,7 @@ const login = async (req, res) => {
       },
     });
   } catch (err) {
+    console.log(err)
     return res.status(500).send("Something went wrong. Please try again");
   }
 };

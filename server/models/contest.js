@@ -15,14 +15,18 @@ const contestSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    startTime: {
-      type: Date,
-      required: true,
-    },
-    endTime: {
-      type: Date,
-      required: true,
-    },
+    fillInBlankQuests: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "FillInBlankQuest",
+      },
+    ],
+    mcqQuests: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "MCQQuest",
+      },
+    ],
   },
   { timestamps: true }
 );

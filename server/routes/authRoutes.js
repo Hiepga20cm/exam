@@ -24,7 +24,7 @@ router.post("/register", validator.body(registerSchema), register);
 
 router.post("/login", validator.body(loginSchema), login);
 
-router.get("/me", requireAuth, (req, res) => {
+router.get("/me", requireAuth.requireAuth, (req, res) => {
   res.status(200).json({
     me: {
       _id: req.user.userId,
@@ -36,7 +36,7 @@ router.get("/me", requireAuth, (req, res) => {
 
 
 // test route for requireAuth middleware
-router.get("/test", requireAuth, (req, res) => {
+router.get("/test", requireAuth.requireAuth, (req, res) => {
   res.send(`Hello, ${req.user.email}`);
 });
 

@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(express.json());
 
 // register the route
 app.use("/api/auth", authRoutes);
-
+app.use("/api/user", userRoutes);
 const server = http.createServer(app);
 
 // Kết nối tới MongoDB
