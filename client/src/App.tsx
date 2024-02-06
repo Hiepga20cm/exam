@@ -10,6 +10,8 @@ import { useAppSelector } from "./store";
 import Loading from "./components/Loading";
 import { DashBoard } from "./pages/DashBoard";
 import { NotFoundPage } from "./pages/NotFound";
+import { UsersComponent } from "./pages/Users";
+import { UserUpdateComponent } from "./pages/UserUpdate";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +33,13 @@ function App() {
           <Route path="/login" element={<Login />} />
 
           <Route path="/dashboard" element={<DashBoard />} />
+
+          <Route path="/users" element={<UsersComponent />} />
+
+          <Route path="/user/:id" element={<UserUpdateComponent />} />
+
+          <Route path="/user/create" element={<UserUpdateComponent />} />
+
 
           {/* <Route
             path="/auth/reset-password/:token"
