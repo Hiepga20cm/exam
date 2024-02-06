@@ -14,6 +14,9 @@ const fillInBlankQuestSchema = new mongoose.Schema(
         type: Object,
         required: true,
       },
+      imageBase64 : {
+          type: String,
+      }
     }
   );
   module.exports = mongoose.model("FillInBlankQuest", fillInBlankQuestSchema);

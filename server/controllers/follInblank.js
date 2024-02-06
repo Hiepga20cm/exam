@@ -4,17 +4,25 @@ const fillInBlankQuest = require("../models/fillInBlank");
 const createFillInBlankQuest = async (req, res) => {
   try {
     const { contestId } = req.params;
-    const { question, numberRange } = req.body;
+    const { question, numberRange  } = req.body;
 
     const oldContest = await contest.findById(contestId);
     if (!oldContest) {
       return res.status(404).json({ success: false, message: "Contest not found" });
     }
 
+    let imageBase64 = null;
+    if (req.file) {
+      const imageBuffer = fs.readFileSync(req.file.path);
+      imageBase64 = imageBuffer.toString('base64');
+      fs.unlinkSync(req.file.path);
+    }
+
     const newFillInBlankQuest = await fillInBlankQuest.create({
       contestId,
       question,
       numberRange,
+      imageBase64,
     });
 
     oldContest.fillInBlankQuests.push(newFillInBlankQuest._id);
@@ -60,7 +68,23 @@ const deleteFillInBlankQuest = async (req, res) => {
   }
 };
 
+const getFillInBlankQuestById = async () => {
+  try {
+    const { id } = req.params;
+
+    const fillInBlankQuestData = await fillInBlankQuest.findById(id);
+    if (!fillInBlankQuestData) {
+      return res.status(404).json({ success: false, message: 'FillInBlankQuest not found' });
+    }
+    return res.status(200).json({ success: true, data: fillInBlankQuestData });
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({ success: false, error });
+  }
+}
+
 module.exports = {
   createFillInBlankQuest,
-  deleteFillInBlankQuest
+  deleteFillInBlankQuest,
+  getFillInBlankQuestById
 };

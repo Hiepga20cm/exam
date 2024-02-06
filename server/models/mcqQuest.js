@@ -18,6 +18,9 @@ const mcqQuestSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
+      imageBase64 : {
+        type: String,
+    }
     }
   );
   module.exports = mongoose.model("MCQQuest", mcqQuestSchema);
