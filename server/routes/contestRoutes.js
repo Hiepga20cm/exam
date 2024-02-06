@@ -14,7 +14,7 @@ const upload = multer({
   });
 
 const requireAuth = require("../middlewares/requireAuth");
-const { createContest, deleteContest } = require("../controllers/contest");
+const { createContest, deleteContest, getContestById } = require("../controllers/contest");
 const { createFillInBlankQuest, deleteFillInBlankQuest } = require("../controllers/follInblank");
 const { createMcqQuest, deleteMcqQuest } = require("../controllers/mcqQuest");
 const router = express.Router();
@@ -25,5 +25,7 @@ router.post("/:contestId/fillInBlankQuest", upload.single('image'), requireAuth.
 router.delete("/:contestId/fillInBlankQuest/:fillInBlankQuestId",requireAuth.isHost, deleteFillInBlankQuest)
 router.post("/:contestId/mcqQuest", requireAuth.isHost, createMcqQuest)
 router.delete("/:contestId/mcqQuest/:mcqQuestId",requireAuth.isHost, deleteMcqQuest)
+router.get("/:contestId",  requireAuth.isHost, getContestById)
+router.get("/getAll", requireAuth.isHost, )
 
 module.exports = router;

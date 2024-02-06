@@ -1,8 +1,10 @@
 const contest = require("../models/contest");
 const fillInBlankQuest = require("../models/fillInBlank");
+const fs = require('fs');
 
 const createFillInBlankQuest = async (req, res) => {
   try {
+    console.log(req.params, req.body)
     const { contestId } = req.params;
     const { question, numberRange  } = req.body;
 
