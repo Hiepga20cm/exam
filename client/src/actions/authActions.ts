@@ -2,8 +2,8 @@ import { Dispatch,  } from "redux";
 import { register, getMe } from "../api/api";
 import { RegisterArgs } from "../api/types";
 import { showAlert } from "./alertActions";
-import { resetChatAction } from "./chatActions";
-import { resetFriendsAction } from "./friendActions";
+// import { resetChatAction } from "./chatActions";
+// import { resetFriendsAction } from "./friendActions";
 import {actionTypes, CurrentUser} from "./types";
 
 export const loginByQrCode = (data : any ) => {
@@ -127,8 +127,8 @@ export const logoutUser = () => {
             type: actionTypes.logout,
         });
 
-        dispatch(resetChatAction());
-        dispatch(resetFriendsAction());
+        // dispatch(resetChatAction());
+        // dispatch(resetFriendsAction());
 
         dispatch({
             type: actionTypes.resetChat
