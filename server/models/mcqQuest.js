@@ -10,8 +10,20 @@ const mcqQuestSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    options: {
-      type: [String],
+    a: {
+      type: String,
+      required: true,
+    },
+    b: {
+      type: String,
+      required: true,
+    },
+    c: {
+      type: String,
+      required: true,
+    },
+    d: {
+      type: String,
       required: true,
     },
     correctOption: {

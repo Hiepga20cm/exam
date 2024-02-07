@@ -17,7 +17,9 @@ const createContest = async (req, res) => {
     };
     const newContest = await contest.create(contestDoc);
     if (newContest) {
-      return res.status(200).send("create contest successfully");
+      return res
+        .status(200)
+        .json({ contest: newContest, message: "create contest successfully"});
     } else {
       return res.status(500).send("Error occurred. Please try again");
     }
@@ -79,6 +81,7 @@ const getContestById = async (req, res) => {
 const getAllContest = async (req, res) => {
   try {
     const contests = await contest.find();
+    console.log(contests);
     return res.status(200).json({ success: true, data: contests });
   } catch (error) {
     console.log(error);

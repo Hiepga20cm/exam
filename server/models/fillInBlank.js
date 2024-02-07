@@ -11,7 +11,7 @@ const fillInBlankQuestSchema = new mongoose.Schema(
       required: true,
     },
     numberRange: {
-      type: Object,
+      type: String,
       required: true,
     },
     imageBase64: {
