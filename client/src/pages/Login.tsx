@@ -9,6 +9,7 @@ import AuthBox from "../components/AuthBox";
 import { validateLoginForm } from "../utils/validators";
 // import {loginUser} from "../actions/authActions";
 import { useAppSelector } from "../store";
+import { loginUser } from "../actions/authActions";
 
 const Wrapper = styled("div")({
   display: "flex",
@@ -64,8 +65,7 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    // dispatch(loginUser(credentials))
-
+     dispatch(loginUser(credentials))
     navigate("/dashboard");
   };
 

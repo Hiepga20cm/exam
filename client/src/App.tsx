@@ -8,46 +8,38 @@ import Register from "./pages/Register";
 import AlertNotification from "./components/AlertNotification";
 import { useAppSelector } from "./store";
 import Loading from "./components/Loading";
-import { DashBoard } from "./pages/DashBoard";
 import { NotFoundPage } from "./pages/NotFound";
 import { UsersComponent } from "./pages/Users";
 import { UserUpdateComponent } from "./pages/UserUpdate";
+import Dashboard from "./pages/Dashboard";
+import UserManager from "./pages/Dashboard/user/userManager";
+import TestManager from "./pages/Dashboard/test/testManager";
+import ContestDetails from "./pages/Dashboard/test/contestDetail";
 
 function App() {
   const dispatch = useDispatch();
-  const { loading } = useAppSelector((state) => state.auth);
+  const { loading, userDetails } = useAppSelector((state) => state.auth);
 
   // auto login
-  // useEffect(() => {
-  //   dispatch(autoLogin());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(autoLogin());
+  }, [dispatch]);
 
   if (loading) {
     return <Loading />;
   }
+  
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-
-          <Route path="/dashboard" element={<DashBoard />} />
-
-          <Route path="/users" element={<UsersComponent />} />
-
-          <Route path="/user/:id" element={<UserUpdateComponent />} />
-
-          <Route path="/user/create" element={<UserUpdateComponent />} />
-
-
-          {/* <Route
-            path="/auth/reset-password/:token"
-            element={<ResetPassword />}
-          /> */}
-          {/* <Route path="/forgotPassword" element={<ForgotPassword />} /> */}
-          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/manage-users" element={<UserManager />} />
+          <Route path="/manage-tests" element={<TestManager />} />
+          <Route path="/contest/:contestId" element = {<ContestDetails/>} />
+          <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
       </BrowserRouter>
       <AlertNotification />
